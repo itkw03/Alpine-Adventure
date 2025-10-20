@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lake Bled Alps Loop • Mobile</title>
+  <style>
+    :root{
+      --bg:#fafafa; /* light grey */
+      --card:#ffffff;
+      --line:#e5e7eb;
+      --text:#111827;
+      --muted:#6b7280;
+      --chip:#f4f4f5;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial}
+    .wrap{max-width:640px;margin:0 auto}
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(250,250,250,.85);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--line)}
+    .row{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+    .brand{display:flex;align-items:center;gap:8px}
+    .avatar{width:32px;height:32px;border-radius:999px;background:#e5e7eb}
+    .btn-icon{border:0;background:transparent;padding:8px;border-radius:999px}
+    .btn-icon:active{background:#f4f4f5}
+
+    .tabs{display:flex;gap:8px;padding:12px 16px}
+    .tab{flex:1;border:1px solid var(--line);background:#f6f6f7;border-radius:12px;padding:10px 12px;font-weight:600}
+    .tab.active{background:#fff;border-color:#d4d4d8;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+
+    .grid{display:grid;gap:16px;padding:16px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+    .card .pad, .card.pad{padding:14px}
+    .hero{aspect-ratio:16/10;background:linear-gradient(135deg,#f3f4f6,#e5e7eb);background-size:cover;background-position:center;border-top-left-radius:16px;border-top-right-radius:16px}
+
+    .title{font-size:16px;font-weight:700;letter-spacing:-.01em}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--chip);border-radius:999px;padding:6px 10px;font-size:12px;color:#52525b}
+
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .muted{color:var(--muted)}
+    .row-s{display:flex;align-items:center;gap:8px;color:#4b5563;font-size:12px;margin-top:8px}
+
+    .stop{display:flex;align-items:flex-start;gap:8px}
+    .stops{display:grid;gap:8px;margin-top:12px}
+    .stop-name{font-weight:600;line-height:1.2}
+    .stop-notes{font-size:12px;color:var(--muted)}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .tag{border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:11px;color:#52525b}
+
+    .box{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:12px}
+
+    .list{list-style:none;padding:0;margin:12px 0 0}
+    .list li{display:flex;align-items:center;justify-content:space-between;border-top:1px dashed #eee;padding:10px 0}
+    .list li:first-child{border-top:0}
+    .open{font-size:12px;color:#52525b;text-decoration:underline}
+
+    .timeline{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+    .slot{display:flex;align-items:center;gap:12px}
+    .time{width:52px;height:24px;border-radius:8px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:12px}
+
+    .bottombar{position:sticky;bottom:0;z-index:50;border-top:1px solid var(--line);background:#fff}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:8px 28px}
+
+    .hide{display:none}
+    .btn{border:1px solid #d4d4d8;border-radius:12px;padding:10px 12px;font-weight:600;background:#fff}
+
+    a{color:inherit}
+    .icon{width:18px;height:18px;display:inline-block;color:#6b7280}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap row">
+      <div class="brand">
+        <div class="avatar" style="display:flex;align-items:center;justify-content:center;font-weight:700;font-size:9px;color:#000000;padding:2px">I + Y</div>
+        <div style="font-weight:700;font-size:14px">Alpine Adventure</div>
+      </div>
+      <button class="btn-icon" id="shareBtn" aria-label="Share">
+        <!-- share icon -->
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7"/><path d="M16 6l-4-4-4 4"/><path d="M12 2v14"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="day1">Day 1</button>
+      <button class="tab" data-tab="day2">Day 2</button>
+    </div>
+
+    <section class="grid">
+      <!-- DAY 1 CARD -->
+      <article id="day1" class="day card">
+        <div class="hero" role="img" aria-label="Kamnik–Savinja Alps near Logar Valley" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop');"></div>
+        <div class="pad">
+          <h2 class="title">Day 1 • Kamnik Savinja Alps Loop</h2>
+          <div class="meta">
+            <span class="chip">
+              <!-- route icon -->
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h7a5 5 0 0 1 5 5v4a3 3 0 0 0 3 3h3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="19" r="2"/></svg>
+              ≈ 270 km
+            </span>
+            <span class="chip">
+              <!-- clock -->
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              ≈ 5.5 h
+            </span>
+            <span class="chip">2–3 h stops</span>
+          </div>
+          <div class="chips">
+            <span class="chip">Hidden valleys</span>
+            <span class="chip">Alpine farms</span>
+            <span class="chip">Mountain passes</span>
+          </div>
+          <div class="row" style="padding-left:0;padding-right:0">
+            <button class="btn" onclick="scrollToId('map-d1')">Open in Google Maps</button>
+            <a class="btn" href="https://www.google.com/maps/dir/?api=1&origin=Lake+Bled&destination=Lake+Bled&waypoints=Solcava+Panoramic+Road+Klemensek+Farm%7CLogarska+Dolina%7CPavlicev+Sedlo%7CPlansarsko+Jezero%7CRadovljica+Old+Town" target="_blank" rel="noopener noreferrer" aria-label="Open full Day 1 driving route in Google Maps">Open full route</a>
+            <button class="btn-icon" aria-label="Save">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- DAY 1 • Sections -->
+      <article class="card pad group-day1">
+        <h3 class="title" style="font-size:14px">Lake Bled → Solčava → Logar Valley</h3>
+        <div class="meta">
+          <span class="chip">≈ 120 km</span>
+          <span class="chip">≈ 2.5 h</span>
+        </div>
+        <div class="row-s">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Bled → Radovljica → Kranj → Mozirje → Solčava → Logar Valley</span>
+        </div>
+        <div class="stops">
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="stop-name">Solčava Panoramic Road</div>
+              <div class="stop-notes">12 signed viewpoints over the Kamnik Savinja Alps</div>
+              <div class="tags">
+                <span class="tag">Klemenšek Farm • Point 1</span>
+                <span class="tag">Strevc Farm • Point 3</span>
+              </div>
+            </div>
+          </div>
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22l8-20 8 20"/></svg>
+            <div>
+              <div class="stop-name">Logar Valley scenic road</div>
+              <div class="stop-notes">7 km meadows and peaks • all paved</div>
+              <div class="tags">
+                <span class="tag">Hotel Plesnik view</span>
+                <span class="tag">Slap Palenk</span>
+                <span class="tag">Rinka carpark</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div>
+            <div style="font-weight:600">Hotel Plesnik Restaurant</div>
+            <div class="muted" style="font-size:12px">Views of Logar Valley</div>
+          </div>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3z"/><path d="M8 8h8v8H8z"/><path d="M12 2v6m0 0l-3 3m3-3l3 3"/></svg>
+        </div>
+      </article>
+
+      <article class="card pad group-day1">
+        <h3 class="title" style="font-size:14px">Logar Valley → Jezersko Pass → Planšarsko Jezero</h3>
+        <div class="meta"><span class="chip">≈ 45 km</span><span class="chip">≈ 1.5 h</span></div>
+        <div class="stops">
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="stop-name">Pavličevo Sedlo</div>
+              <div class="stop-notes">Border pass viewpoint</div>
+            </div>
+          </div>
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="stop-name">Planšarsko Jezero</div>
+              <div class="stop-notes">Small emerald lake • café beside</div>
+            </div>
+          </div>
+        </div>
+        <div class="muted" style="margin-top:8px;font-size:12px">Relax 30–45 min for photos</div>
+      </article>
+
+      <article class="card pad group-day1">
+        <h3 class="title" style="font-size:14px">Jezersko → Preddvor → Radovljica → Lake Bled</h3>
+        <div class="meta"><span class="chip">≈ 90 km</span><span class="chip">≈ 2 h</span></div>
+        <div class="muted" style="margin-top:8px;font-size:12px">Optional • Radovljica Old Town for coffee or gelato • Return by 6–7 pm</div>
+      </article>
+
+      <article class="card pad group-day1">
+        <h3 class="title" style="font-size:14px">Sample timeline</h3>
+        <ol class="timeline">
+          <li class="slot"><div class="time">8:00</div><div>Depart Lake Bled</div></li>
+          <li class="slot"><div class="time">9:30</div><div>Arrive Solčava Panoramic Road</div></li>
+          <li class="slot"><div class="time">10:30</div><div>Klemenšek Farm viewpoint</div></li>
+          <li class="slot"><div class="time">11:00</div><div>Logar Valley entrance</div></li>
+          <li class="slot"><div class="time">12:30</div><div>Lunch at Hotel Plesnik</div></li>
+          <li class="slot"><div class="time">14:00</div><div>Pavličevo Sedlo pass</div></li>
+          <li class="slot"><div class="time">15:00</div><div>Planšarsko Jezero lake</div></li>
+          <li class="slot"><div class="time">16:30</div><div>Optional Radovljica stop</div></li>
+          <li class="slot"><div class="time">18:00</div><div>Return to Lake Bled</div></li>
+        </ol>
+      </article>
+
+      <article id="map-d1" class="card pad group-day1">
+        <h3 class="title" style="font-size:14px">Add to Google Maps</h3>
+        <ul class="list">
+          <li><span>1. Lake Bled</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener noreferrer" aria-label="Open Lake Bled in Google Maps">Open</a></li>
+          <li><span>2. Solčava Panoramic • Klemenšek Farm</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Klemen%C5%A1ek+Farm+Sol%C4%8Dava" target="_blank" rel="noopener noreferrer" aria-label="Open Solčava Panoramic Road Klemenšek Farm in Google Maps">Open</a></li>
+          <li><span>3. Logar Valley</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Logarska+Dolina" target="_blank" rel="noopener noreferrer" aria-label="Open Logar Valley in Google Maps">Open</a></li>
+          <li><span>4. Pavličevo Sedlo</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Pavli%C4%8Devo+Sedlo" target="_blank" rel="noopener noreferrer" aria-label="Open Pavličevo Sedlo pass in Google Maps">Open</a></li>
+          <li><span>5. Planšarsko Jezero</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Plan%C5%A1arsko+Jezero" target="_blank" rel="noopener noreferrer" aria-label="Open Planšarsko Jezero in Google Maps">Open</a></li>
+          <li><span>6. Radovljica Old Town</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Radovljica+Old+Town" target="_blank" rel="noopener noreferrer" aria-label="Open Radovljica Old Town in Google Maps">Open</a></li>
+          <li><span>7. Lake Bled</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener noreferrer" aria-label="Open Lake Bled in Google Maps">Open</a></li>
+        </ul>
+      </article>
+
+      <!-- DAY 2 CARD -->
+      <article id="day2" class="day card hide">
+        <div class="hero" role="img" aria-label="Triglav National Park lakes and Soča River" style="background-image:url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1600&auto=format&fit=crop');"></div>
+        <div class="pad">
+          <h2 class="title">Day 2 • Triglav Lakes and Soča Loop</h2>
+          <div class="meta">
+            <span class="chip">≈ 260 km</span>
+            <span class="chip">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              ≈ 7 h
+            </span>
+            <span class="chip">photos + meals</span>
+          </div>
+          <div class="chips">
+            <span class="chip">TNP lakes</span>
+            <span class="chip">Italian Alps</span>
+            <span class="chip">Emerald rivers</span>
+            <span class="chip">Mountain passes</span>
+          </div>
+          <div class="row" style="padding-left:0;padding-right:0">
+            <button class="btn" onclick="scrollToId('map-d2')">Open in Google Maps</button>
+            <a class="btn" href="https://www.google.com/maps/dir/?api=1&origin=Lake+Bled&destination=Lake+Bled&waypoints=Vintgar+Gorge%7CLago+Superiore+di+Fusine%7CKranjska+Gora%7CLake+Jasna%7CRussian+Chapel+Vrsic%7CVrsic+Pass+Summit%7CSo%C4%8Da+Gorge%7CBovec%7CBoka+Waterfall%7CLake+Bohinj+Rib%C4%8Dev+Laz%7CSavica+Waterfall" target="_blank" rel="noopener noreferrer" aria-label="Open full Day 2 driving route in Google Maps">Open full route</a>
+            <button class="btn-icon" aria-label="Save">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- DAY 2 • Sections -->
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Lake Bled → Vintgar Gorge</h3>
+        <div class="meta"><span class="chip">≈ 5 km</span><span class="chip">~ 10 min</span></div>
+        <ul class="tags" style="margin-top:8px">
+          <li class="tag">Arrive 7:30–8:30 am to beat crowds</li>
+          <li class="tag">Flat 1.6 km boardwalk • allow ~45 min</li>
+        </ul>
+        <div class="muted" style="margin-top:8px;font-size:12px">Parking • official Vintgar car park</div>
+      </article>
+
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Vintgar Gorge → Lago di Fusine (Italy)</h3>
+        <div class="meta"><span class="chip">≈ 70 km</span><span class="chip">≈ 1 h 15 min</span></div>
+        <div class="row-s"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Vintgar → Jesenice → Kranjska Gora → Rateče → Tarvisio → Lago di Fusine</span></div>
+        <div class="stops">
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>
+            <div>
+              <div class="stop-name">Lago Inferiore • Superiore</div>
+              <div class="stop-notes">Emerald lakes with Mangart backdrop</div>
+            </div>
+          </div>
+          <div class="stop">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18"/><path d="M19 3v18"/><path d="M7 3v18"/></svg>
+            <div>
+              <div class="stop-name">Rifugio Luigi Zacchi</div>
+              <div class="stop-notes">Coffee and snack</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Fusine → Kranjska Gora → Vršič Pass</h3>
+        <div class="meta"><span class="chip">≈ 35 km</span><span class="chip">≈ 1 h 15 min incl. stops</span></div>
+        <div class="stops">
+          <div class="stop"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><div class="stop-name">Lake Jasna</div><div class="stop-notes">Turquoise lake and photo deck</div></div></div>
+          <div class="stop"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><div><div class="stop-name">Russian Chapel</div><div class="stop-notes">WWI memorial</div></div></div>
+          <div class="stop"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><div class="stop-name">Vršič Summit 1,611 m</div><div class="stop-notes">Wide lookout car park</div></div></div>
+        </div>
+      </article>
+
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Vršič → Trenta → Soča Valley → Bovec</h3>
+        <div class="meta"><span class="chip">≈ 40 km</span><span class="chip">≈ 1 h</span></div>
+        <div class="stops">
+          <div class="stop"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg><div><div class="stop-name">Soča River Source</div><div class="stop-notes">View from bridge</div></div></div>
+          <div class="stop"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg><div><div class="stop-name">Soča Gorge</div><div class="stop-notes">Photo stop at bridge</div></div></div>
+            </div>
+        <div class="box"><div><div style="font-weight:600">Felix Bovec or Sovdat</div><div class="muted" style="font-size:12px">Lunch</div></div><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18"/><path d="M19 3v18"/><path d="M7 3v18"/></svg></div>
+        <div class="muted" style="margin-top:8px;font-size:12px">Optional • Boka Waterfall • 5 min walk to viewpoint</div>
+      </article>
+
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Bovec → Tolmin → Lake Bohinj → Bled</h3>
+        <ul class="tags" style="margin-top:8px">
+          <li class="tag"><strong>Option A</strong> • AutoVlak car train via Most na Soči • ≈ 3 h</li>
+          <li class="tag"><strong>Option B</strong> • Scenic drive via Kobarid and Tolmin • ≈ 4 h</li>
+        </ul>
+        <div class="chips" style="margin-top:8px">
+          <span class="chip">Ribčev Laz bridge view</span>
+          <span class="chip">Savica Waterfall optional</span>
+        </div>
+      </article>
+
+      <article class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Sample timeline</h3>
+        <ol class="timeline">
+          <li class="slot"><div class="time">7:30</div><div>Arrive Vintgar Gorge</div></li>
+          <li class="slot"><div class="time">8:30</div><div>Depart for Lago di Fusine</div></li>
+          <li class="slot"><div class="time">9:45</div><div>Arrive Lago di Fusine</div></li>
+          <li class="slot"><div class="time">11:15</div><div>Lake Jasna</div></li>
+          <li class="slot"><div class="time">12:00</div><div>Russian Chapel and Vršič Summit</div></li>
+          <li class="slot"><div class="time">13:30</div><div>Lunch in Bovec</div></li>
+          <li class="slot"><div class="time">15:30</div><div>Soča Valley and Boka Waterfall</div></li>
+          <li class="slot"><div class="time">17:00</div><div>Arrive Lake Bohinj</div></li>
+          <li class="slot"><div class="time">18:30</div><div>Return Lake Bled</div></li>
+        </ol>
+      </article>
+
+      <article id="map-d2" class="card pad group-day2">
+        <h3 class="title" style="font-size:14px">Add to Google Maps</h3>
+        <ul class="list">
+          <li><span>1. Lake Bled</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener noreferrer" aria-label="Open Lake Bled in Google Maps">Open</a></li>
+          <li><span>2. Vintgar Gorge</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Vintgar+Gorge" target="_blank" rel="noopener noreferrer" aria-label="Open Vintgar Gorge in Google Maps">Open</a></li>
+          <li><span>3. Lago Superiore di Fusine</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lago+Superiore+di+Fusine" target="_blank" rel="noopener noreferrer" aria-label="Open Lago Superiore di Fusine in Google Maps">Open</a></li>
+          <li><span>4. Kranjska Gora</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Kranjska+Gora" target="_blank" rel="noopener noreferrer" aria-label="Open Kranjska Gora in Google Maps">Open</a></li>
+          <li><span>5. Lake Jasna</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lake+Jasna" target="_blank" rel="noopener noreferrer" aria-label="Open Lake Jasna in Google Maps">Open</a></li>
+          <li><span>6. Russian Chapel</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Russian+Chapel+Vrsic" target="_blank" rel="noopener noreferrer" aria-label="Open Russian Chapel Vršič in Google Maps">Open</a></li>
+          <li><span>7. Vršič Pass Summit</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Vrsic+Pass+Summit" target="_blank" rel="noopener noreferrer" aria-label="Open Vršič Pass Summit in Google Maps">Open</a></li>
+          <li><span>8. Soča Gorge</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Soca+Gorge" target="_blank" rel="noopener noreferrer" aria-label="Open Soča Gorge in Google Maps">Open</a></li>
+          <li><span>9. Bovec</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Bovec" target="_blank" rel="noopener noreferrer" aria-label="Open Bovec in Google Maps">Open</a></li>
+          <li><span>10. Boka Waterfall</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Boka+Waterfall" target="_blank" rel="noopener noreferrer" aria-label="Open Boka Waterfall in Google Maps">Open</a></li>
+          <li><span>11. Lake Bohinj • Ribčev Laz</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Rib%C4%8Dev+Laz+Lake+Bohinj" target="_blank" rel="noopener noreferrer" aria-label="Open Ribčev Laz Lake Bohinj in Google Maps">Open</a></li>
+          <li><span>12. Savica Waterfall (optional)</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Savica+Waterfall" target="_blank" rel="noopener noreferrer" aria-label="Open Savica Waterfall in Google Maps">Open</a></li>
+          <li><span>13. Lake Bled</span><a class="open" href="https://www.google.com/maps/search/?api=1&query=Lake+Bled" target="_blank" rel="noopener noreferrer" aria-label="Open Lake Bled in Google Maps">Open</a></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="bottombar">
+    <div class="wrap nav">
+      <button class="btn-icon" aria-label="Home">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l9-9 9 9"/><path d="M9 21V9h6v12"/></svg>
+      </button>
+      <button class="btn-icon" aria-label="Map">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </button>
+      <button class="btn-icon" aria-label="Save">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const days = document.querySelectorAll('.day');
+    const groupDay1 = document.querySelectorAll('.group-day1');
+    const groupDay2 = document.querySelectorAll('.group-day2');
+    tabs.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        tabs.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const id = btn.getAttribute('data-tab');
+        days.forEach(d=> d.classList.toggle('hide', d.id !== id));
+        const showDay1 = id === 'day1';
+        groupDay1.forEach(el=> el.classList.toggle('hide', !showDay1));
+        groupDay2.forEach(el=> el.classList.toggle('hide', showDay1));
+        window.scrollTo({top:0,behavior:'smooth'});
+      });
+    });
+    // initialize visibility for default active tab
+    groupDay1.forEach(el=> el.classList.toggle('hide', false));
+    groupDay2.forEach(el=> el.classList.toggle('hide', true));
+    function scrollToId(id){
+      const el = document.getElementById(id);
+      if(el){ el.scrollIntoView({behavior:'smooth'}); }
+    }
+    document.getElementById('shareBtn')?.addEventListener('click', async ()=>{
+      const title = 'Lake Bled Alps Loop';
+      const text = document.querySelector('.tab.active')?.textContent + ' itinerary';
+      try{
+        if(navigator.share){ await navigator.share({title, text}); }
+        else{ await navigator.clipboard.writeText(title + ' • ' + text); alert('Copied'); }
+      }catch(e){ }
+    });
+  </script>
+</body>
+</html>
